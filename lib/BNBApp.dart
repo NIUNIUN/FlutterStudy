@@ -32,7 +32,10 @@ class _AppHomePageState extends State<AppHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("岛上孤独"),
+        title: Text(
+          "岛上孤独",
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
         backgroundColor: Colors.green,
         foregroundColor: Colors.deepPurple,
         shadowColor: Colors.red,
@@ -47,8 +50,7 @@ class _AppHomePageState extends State<AppHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.green,
-          unselectedItemColor: Colors.black,
+          selectedItemColor: Theme.of(context).primaryColor,
           currentIndex: _index,
           onTap: _onBottomNavigationBarTapped,
           items: [

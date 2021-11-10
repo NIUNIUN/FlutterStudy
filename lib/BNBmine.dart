@@ -11,4 +11,14 @@ class MinePage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _headerGridButton(){
+    return Container();
+  }
+
+  Widget _getMenu(IconData iconData,String title){
+    return Container(
+
+    );
+  }
 }

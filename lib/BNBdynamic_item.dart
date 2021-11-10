@@ -1,6 +1,7 @@
 // 构建列表元素
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class DynamicItem extends StatelessWidget {
@@ -38,6 +39,27 @@ class DynamicItem extends StatelessWidget {
     );
   }
 
+  /**
+   * 使用网络缓存
+   */
+  Widget _imageWrapper(String imageUrl) {
+    return SizedBox(
+      height: ITEM_HEIGHT,
+      width: 150,
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        // 进度条和占位符不能同时使用
+        progressIndicatorBuilder: (context, url, downloadProgress) =>
+            LinearProgressIndicator(value: downloadProgress.progress),
+        // placeholder: (context, url) => Image.asset('images/ic_device.png'),
+        errorWidget: (context, url, error) =>
+            Icon(Icons.error, color: Colors.red),
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+
+/*  // Image.network：没有缓存功能；体验功能不好。
   Widget _imageWrapper(String imageUrl) {
     return SizedBox(
       height: ITEM_HEIGHT,
@@ -48,6 +70,7 @@ class DynamicItem extends StatelessWidget {
       ),
     );
   }
+*/
 
   Widget _titleWrapper(BuildContext context, String title) {
     return Container(

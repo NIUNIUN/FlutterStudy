@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermyapp/components/form_util.dart';
 
@@ -24,7 +25,10 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _getRoundImage("images/lake.jpg", 100.0),
+            // _getRoundImage("images/lake.jpg", 100.0),
+            _getRoundImage(
+                "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4",
+                100.0),
             SizedBox(height: 60),
             SizedBox(height: 10),
             _getUsernameInput2(),
@@ -73,8 +77,11 @@ class _LoginPageState extends State<LoginPage> {
 
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(size / 2))),
-      child: Image.asset(
-        imageName,
+      child:
+          // Image.asset(
+          CachedNetworkImage(
+        // Image.network(
+        imageUrl: imageName,
         fit: BoxFit.fill,
       ),
     );

@@ -49,8 +49,15 @@ class DynamicItem extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         // 进度条和占位符不能同时使用
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            LinearProgressIndicator(value: downloadProgress.progress),
+        progressIndicatorBuilder: (context, url, downloadProgress) {
+          return Center(
+            // 包装一个widget，否则宽高为父widget的值
+              child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: CircularProgressIndicator(value: downloadProgress.progress),
+          ));
+        },
         // placeholder: (context, url) => Image.asset('images/ic_device.png'),
         errorWidget: (context, url, error) =>
             Icon(Icons.error, color: Colors.red),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermyapp/components/form_util.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,17 +17,18 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('登录'),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _getRoundImage("image/logo.png", 100.0),
+            _getRoundImage("images/lake.jpg", 100.0),
             SizedBox(height: 60),
             SizedBox(height: 10),
-            _getUsernameInput(),
-            _getPasswordInput(),
+            _getUsernameInput2(),
+            _getPasswordInput2(),
             _getLoginButton(),
           ],
         ),
@@ -34,67 +36,32 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _getUsernameInput() {
-    return _getInputTextField(
-      TextInputType.number,
-      controller: _usernameController,
-      decoration: InputDecoration(
-        hintText: "输入手机号",
-        icon: Icon(
-          Icons.mobile_friendly_rounded,
-          size: 20,
-        ),
-        border: InputBorder.none,
-        suffixIcon: GestureDetector(
-          child: Offstage(
-            child: Icon(Icons.clear),
-            offstage: _username == '',
-          ),
-          onTap: () {
-            setState(() {
-              _username = '';
-              _usernameController.clear();
-            });
-          },
-        ),
-      ),
-      onChanged: (value) {
-        // 使用onchanged() 完成双向绑定
-        setState(() {
-          _username = value;
-        });
-      },
+  Widget _getUsernameInput2() {
+    return FormUtil.textField(
+      'username',
+      (_formData['username']?['value']).toString(),
+      Theme.of(context).primaryColor,
+      keyboardType: TextInputType.number,
+      controller: _formData['username']?['controller'],
+      hintText: '请输入手机号',
+      prefixIcon: Icons.mobile_friendly,
+      onChanged: _handleTextFieldChanged,
+      onClear: _handleClear,
     );
   }
 
-  Widget _getPasswordInput() {
-    return _getInputTextField(TextInputType.text,
-        obscureText: true,
-        controller: _passwordController,
-        decoration: InputDecoration(
-          hintText: "输入密码",
-          icon: Icon(
-            Icons.lock_open,
-            size: 20.0,
-          ),
-          suffixIcon: GestureDetector(
-            child: Offstage(
-              child: Icon(Icons.clear),
-              offstage: _password == '',
-            ),
-            onTap: () {
-              setState(() {
-                _password = '';
-                _passwordController.clear();
-              });
-            },
-          ),
-          border: InputBorder.none,
-        ), onChanged: (value) {
-      setState(() {
-        _password = value;
-      });
-    });
+  Widget _getPasswordInput2() {
+    return FormUtil.textField(
+      'password',
+      (_formData['password']?['value']).toString(),
+      Theme.of(context).primaryColor,
+      keyboardType: TextInputType.number,
+      controller: _formData['password']?['controller'],
+      hintText: '请输入密码',
+      prefixIcon: Icons.mobile_friendly,
+      onChanged: _handleTextFieldChanged,
+      onClear: _handleClear,
+    );
   }
 
   Widget _getRoundImage(String imageName, double size) {
@@ -103,11 +70,12 @@ class _LoginPageState extends State<LoginPage> {
       height: size,
       clipBehavior: Clip.antiAlias,
       // 抗锯齿
+
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(size / 2))),
       child: Image.asset(
         imageName,
-        fit: BoxFit.fitWidth,
+        fit: BoxFit.fill,
       ),
     );
   }
@@ -137,34 +105,29 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _getInputTextField(
-    TextInputType keyboardType, {
-    focusNode: FocusNode,
-    controller: TextEditingController,
-    onChanged: Function,
-    decoration: InputDecoration,
-    bool obscureText = false,
-    height = 50.0,
-  }) {
-    return Container(
-      height: height,
-      margin: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          TextField(
-            keyboardType: keyboardType,
-            focusNode: focusNode,
-            obscureText: obscureText,
-            controller: controller,
-            decoration: decoration,
-            onChanged: onChanged,
-          ),
-          Divider(
-            height: 1.0,
-            color: Colors.grey[400],
-          )
-        ],
-      ),
-    );
+  Map<String, Map<String, Object>> _formData = {
+    'username': {
+      'value': '',
+      'controller': TextEditingController(),
+      'obsecure': false,
+    },
+    'password': {
+      'value': '',
+      'controller': TextEditingController(),
+      'obsecure': true,
+    }
+  };
+
+  _handleTextFieldChanged(String formKay, String value) {
+    this.setState(() {
+      _formData[formKay]?['value'] = value;
+    });
+  }
+
+  _handleClear(String formKey) {
+    this.setState(() {
+      _formData[formKey]?['value'] = '';
+      (_formData[formKey]?['controller'] as TextEditingController).clear();
+    });
   }
 }

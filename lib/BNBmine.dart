@@ -74,6 +74,7 @@ class MinePage extends StatelessWidget {
       crossAxisCount: crossAxiscount,
       crossAxisSpacing: gridSpace,
       mainAxisSpacing: gridSpace,
+
       // 设置 shrinkWrap 和 physics 参数：停止 GridView 的滚动，防止与 ListView 冲突
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -98,7 +99,7 @@ class MinePage extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 14, color: color,height: 1),
+          style: TextStyle(fontSize: 14, color: color, height: 1),
         )
       ],
     );

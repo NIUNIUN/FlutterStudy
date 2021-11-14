@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             bodyText1: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
           ),
           fontFamily: 'Georgia'),
-      home: AppHomePage(),
+      home: SafeArea(child:AppHomePage()),
     );
   }
 }

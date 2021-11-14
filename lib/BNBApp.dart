@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttermyapp/BNBcategory.dart';
 import 'package:fluttermyapp/BNBdynamic.dart';
 import 'package:fluttermyapp/BNBmessage.dart';
-import 'package:fluttermyapp/BNBmine.dart';
+import 'package:fluttermyapp/BNB_mine.dart';
 
 class AppHomePage extends StatefulWidget {
   const AppHomePage({Key? key}) : super(key: key);
@@ -31,19 +31,20 @@ class _AppHomePageState extends State<AppHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "岛上孤独",
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.deepPurple,
-        shadowColor: Colors.red,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.lime,
-          statusBarBrightness: Brightness.light,
-        ),
-      ),
+
+      // appBar: AppBar(
+      //   title: Text(
+      //     "岛上孤独",
+      //     style: Theme.of(context).textTheme.bodyText1,
+      //   ),
+      //   backgroundColor: Colors.green,
+      //   foregroundColor: Colors.deepPurple,
+      //   shadowColor: Colors.red,
+      //   systemOverlayStyle: SystemUiOverlayStyle(
+      //     statusBarColor: Colors.lime,
+      //     statusBarBrightness: Brightness.light,
+      //   ),
+      // ),
       body: IndexedStack(
         index: _index,
         children: _homeWidget,

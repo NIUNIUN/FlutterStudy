@@ -3,7 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttermyapp/BNBmine_mock_data.dart';
+import 'package:fluttermyapp/bnb_mine_mock_data.dart';
 
 class MinePage extends StatelessWidget {
   static const double MARGIN = 10.0;

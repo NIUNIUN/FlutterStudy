@@ -1,13 +1,15 @@
 // 作为入口文件，应当做最基础的配置和全局初始化配置，不应该有业务代码。
 import 'package:flutter/material.dart';
-import 'package:fluttermyapp/BNBApp.dart';
+import 'package:fluttermyapp/bnb_app.dart';
+import 'package:fluttermyapp/components/bnb_router_table.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +33,15 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.normal,
                 color: Colors.white),
             headline6: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w200, color: Colors.black87),
+                fontSize: 14,
+                fontWeight: FontWeight.w200,
+                color: Colors.black87),
             bodyText1: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
           ),
           fontFamily: 'Georgia'),
-      home: SafeArea(child:AppHomePage()),
+      navigatorKey: navigationKey,
+      onGenerateRoute: RouterTable.onGenerateRoute,
+      home: SafeArea(child: AppHomePage()),
     );
   }
 }

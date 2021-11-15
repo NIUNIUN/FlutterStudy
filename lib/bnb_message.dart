@@ -33,7 +33,13 @@ class MessagePage extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () async {
-                  _showMultiChoiceModalButtomSheet(context, _basicData());
+                  var list = _basicData();
+                  List<int>? selectList =
+                      await _showMultiChoiceModalButtomSheet(
+                          context, _basicData());
+                  selectList?.forEach((index) {
+                    print("选择index = " + list[index]);
+                  });
                 },
                 child: Text("多选底部弹窗")),
           ],

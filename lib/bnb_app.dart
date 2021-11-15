@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttermyapp/BNBcategory.dart';
-import 'package:fluttermyapp/BNBdynamic.dart';
-import 'package:fluttermyapp/BNBmessage.dart';
-import 'package:fluttermyapp/BNB_mine.dart';
+import 'package:fluttermyapp/bnb_category.dart';
+import 'package:fluttermyapp/bnb_dynamic.dart';
+import 'package:fluttermyapp/bnb_message.dart';
+import 'package:fluttermyapp/bnb_mine.dart';
 
 class AppHomePage extends StatefulWidget {
   const AppHomePage({Key? key}) : super(key: key);
@@ -31,7 +31,6 @@ class _AppHomePageState extends State<AppHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       // appBar: AppBar(
       //   title: Text(
       //     "岛上孤独",

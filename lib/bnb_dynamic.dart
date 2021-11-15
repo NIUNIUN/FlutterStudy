@@ -1,8 +1,8 @@
 // 项目业务页面 —— 动态
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:fluttermyapp/BNBdynamic_item.dart';
-import 'package:fluttermyapp/BNBdynamic_mock_data.dart';
+import 'package:fluttermyapp/bnb_dynamic_item.dart';
+import 'package:fluttermyapp/bnb_dynamic_mock_data.dart';
 
 /*   // 静态数据
 class DynamicPage extends StatelessWidget {
@@ -70,7 +70,7 @@ class _DynamicPageState extends State<DynamicPage> {
         child: ListView.builder(
             itemCount: _listItems.length,
             itemBuilder: (context, index) {
-              return DynamicItem(_listItems[index]['imageUrl'],
+              return DynamicItem(index, _listItems[index]['imageUrl'],
                   _listItems[index]['title'], _listItems[index]['viewCount']);
             }),
       ),

@@ -3,8 +3,10 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermyapp/components/bnb_router_table.dart';
 
 class DynamicItem extends StatelessWidget {
+  final int id;
   final String imageUrl;
   final String title;
   final int viewCount;
@@ -13,29 +15,45 @@ class DynamicItem extends StatelessWidget {
   static const double TITLE_HEIGHT = 80;
   static const double MARGIN_SIZE = 10;
 
-  DynamicItem(this.imageUrl, this.title, this.viewCount, {Key? key})
+  DynamicItem(this.id, this.imageUrl, this.title, this.viewCount, {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(MARGIN_SIZE),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _imageWrapper(imageUrl),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _titleWrapper(context, title),
-                _viewCountWrapper(viewCount.toString())
-              ],
+    return GestureDetector(
+      child: Container(
+        padding: EdgeInsets.all(MARGIN_SIZE),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _imageWrapper(imageUrl),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _titleWrapper(context, title),
+                  _viewCountWrapper(viewCount.toString())
+                ],
+              ),
             ),
-          ),
-          // ),
-        ],
+            // ),
+          ],
+        ),
       ),
+      onTap: () async {
+        Map<String, dynamic> routeParams = {'id': id};
+
+        // 接收等待 返回值
+        var arguments = await Navigator.of(context)
+            .pushNamed(RouterTable.dynamicDetail, arguments: routeParams);
+
+        // Snacbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('从动态${(arguments as Map<String, dynamic>)['id']}返回'),
+          ),
+        );
+      },
     );
   }
 
@@ -51,7 +69,7 @@ class DynamicItem extends StatelessWidget {
         // 进度条和占位符不能同时使用
         progressIndicatorBuilder: (context, url, downloadProgress) {
           return Center(
-            // 包装一个widget，否则宽高为父widget的值
+              // 包装一个widget，否则宽高为父widget的值
               child: SizedBox(
             width: 50.0,
             height: 50.0,

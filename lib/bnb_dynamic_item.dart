@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermyapp/components/bnb_router_manager.dart';
 import 'package:fluttermyapp/components/bnb_router_table.dart';
 
 class DynamicItem extends StatelessWidget {
@@ -44,13 +45,19 @@ class DynamicItem extends StatelessWidget {
         Map<String, dynamic> routeParams = {'id': id};
 
         // 接收等待 返回值
-        var arguments = await Navigator.of(context)
-            .pushNamed(RouterTable.dynamicDetail, arguments: routeParams);
+        // var arguments = await
+        // Navigator.of(context)
+        //     .pushNamed(RouterTable.dynamicDetail, arguments: routeParams);
+
+        // 使用 fluro 路由插件
+        var arguments = await RouterManager.router!.navigateTo(
+            context, '${RouterManager.dynamicPath}/${id}?event=a&event=b');
 
         // Snacbar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('从动态${(arguments as Map<String, dynamic>)['id']}返回'),
+            // content: Text('从动态返回'),
           ),
         );
       },

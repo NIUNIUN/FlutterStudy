@@ -19,7 +19,7 @@ class MinePage extends StatelessWidget {
           // 表示反转滚动。 垂直方向：滚动方向改为向上；水平方向：改为向左
           reverse: false,
           slivers: [
-            _getAppBar("个人中心"),
+            _getAppBar(context, "个人中心"),
             _headerGridButton(),
             _getMenuTitle("金融理财"),
             _sliverGridButtons(MineMockData.financeGrids(), 4),
@@ -39,12 +39,13 @@ class MinePage extends StatelessWidget {
     );
   }
 
-  SliverAppBar _getAppBar(String title) {
+  SliverAppBar _getAppBar(BuildContext context, String title) {
     return SliverAppBar(
+      backgroundColor: Theme.of(context).primaryColor,
       // pinned: 滚动到顶部后，导航了是否可见。默认：false，不可见。
       pinned: true,
       // floating:浮动，即便是滚动试图不在顶部，也会跟随滚动出来。默认：false，不会跟随滚动出现。
-      floating:false,
+      floating: false,
 
       expandedHeight: 230,
       systemOverlayStyle: SystemUiOverlayStyle.dark,

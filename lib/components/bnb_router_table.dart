@@ -3,6 +3,7 @@ import 'package:fluttermyapp/bnb_app.dart';
 import 'package:fluttermyapp/bnb_dynamic_detail.dart';
 import 'package:fluttermyapp/bnb_login.dart';
 import 'package:fluttermyapp/bnb_not_found.dart';
+import 'package:fluttermyapp/dnd_splash.dart';
 
 /**
  * 全部使用静态属性和静态方法，无需反复构建对象。
@@ -16,10 +17,11 @@ class RouterTable {
   static String dynamicDetail = 'dynamic_detail';
 
   static Map<String, WidgetBuilder> routeTable = {
+    splashPath: (context) => SplashPage(),
     notFoundPath: (context) => NotFound(),
     loginPath: (context) => LoginPage(),
     homePath: (context) => AppHomePage(),
-    dynamicDetail: (context) => DynamicDetail()
+    dynamicDetail: (context) => DynamicDetail("")
   };
 
   // 路由拦截

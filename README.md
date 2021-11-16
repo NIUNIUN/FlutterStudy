@@ -35,13 +35,22 @@ Flutter 学习与总结： https://blog.csdn.net/qq_27948659/article/details/102
 Dart 中一切皆 **对象，甚至数字、方法和null** 都是对象。
 
 标识符可以字母或（_）开始，或者是字符加数字的组合开头。
+
+    Dart 2.9 引入空安全（null-safety）：
+     - 声明变量默认为不为空，必须在定义时初始化；
+     - int? k; //定义可空类型，对于可为空得变量，在使用前必须判读空。
+     - 如果我们预期变量不能为空，但在定义时不饿能确定其初始值，可以加上late关键字，表示懒加载。 late int k;
+     - fun!.call() // 表示 显示告诉预处理器它已经不是 null 。如果没有显示申明，则IDE会报错。
+     - fun?.call() // 表示 fun 不为空时则会被调用。 
+     - b ??= value; // 如果b是null，将value赋值给b；否则，b将保持不变。
+
 ## 变量声明
-    未初始化的变量初始值为null，数字也是。
 - var，可定义任意类型变量，不过一旦赋值后，不能再更改类型。
 - const ，是编译时常量
 - final ，只能赋值一次。   **实例变量可以为 final 但不能为 const。**
 - Object 是所有对象的根基类（包括 Function 和 Null）；Object 声明的对象只能使用 Object 的属性和方法。
 - dynamic 和 var 一样是关键词； dunamic 后期可更改类型； dynamic 声明的对象编译器会提供所有可能的组合。
+
 ## 数据类型
 ### 基本数据类型
 - var 可定义变量。

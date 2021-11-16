@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttermyapp/bnb_login.dart';
+import 'package:fluttermyapp/components/bnb_router_manager.dart';
 import 'package:fluttermyapp/components/bnb_router_table.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -16,7 +17,11 @@ class CategoryPage extends StatelessWidget {
           children: [
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(RouterTable.loginPath);
+                  // Navigator.of(context).pushNamed(RouterTable.loginPath);
+
+                  // 使用 fluro 路由插件
+                  RouterManager.router!.navigateTo(context, RouterManager.loginPath);
+
                 },
                 child: const Text("登录")),
             const SizedBox(

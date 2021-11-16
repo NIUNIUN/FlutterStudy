@@ -2,6 +2,8 @@ import 'dart:ffi';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermyapp/anima/router_transition.dart';
+import 'package:fluttermyapp/anima/skew_transition.dart';
 import 'package:fluttermyapp/bnb_app.dart';
 import 'package:fluttermyapp/bnb_dynamic_detail.dart';
 import 'package:fluttermyapp/bnb_login.dart';
@@ -74,8 +76,23 @@ class RouterManager {
   static void defineRoutes() {
     router!.define(splashPath, handler: splashHandler);
     router!.define(homePath, handler: homeHandler);
-    router!.define(loginPath, handler: loginHandler);
-    router!.define(dynamicDetailPath, handler: dynamicDetailHandler);
+
+    // transitionType 指定转场方式；transitionDuration 动画时长，一般转场动态建议在200-300毫秒之间。
+    router!.define(
+      loginPath,
+      handler: loginHandler,
+
+      // 转场动画
+      transitionType: TransitionType.custom,
+
+      // 逆时针围绕中心旋转
+      transitionBuilder: RouterTransition.skewTransition,
+    );
+
+    router!.define(dynamicDetailPath,
+        handler: dynamicDetailHandler,
+        transitionType: TransitionType.inFromBottom,
+        transitionDuration: Duration(milliseconds: 1000));
     router!.notFoundHandler = notFoundHandler;
   }
 }

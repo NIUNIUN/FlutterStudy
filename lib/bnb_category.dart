@@ -20,8 +20,8 @@ class CategoryPage extends StatelessWidget {
                   // Navigator.of(context).pushNamed(RouterTable.loginPath);
 
                   // 使用 fluro 路由插件
-                  RouterManager.router!.navigateTo(context, RouterManager.loginPath);
-
+                  RouterManager.router!
+                      .navigateTo(context, RouterManager.loginPath);
                 },
                 child: const Text("登录")),
             const SizedBox(

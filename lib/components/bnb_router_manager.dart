@@ -1,14 +1,11 @@
-import 'dart:ffi';
-
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttermyapp/anima/router_transition.dart';
-import 'package:fluttermyapp/anima/skew_transition.dart';
 import 'package:fluttermyapp/bnb_app.dart';
 import 'package:fluttermyapp/bnb_dynamic_detail.dart';
 import 'package:fluttermyapp/bnb_login.dart';
 import 'package:fluttermyapp/bnb_not_found.dart';
 import 'package:fluttermyapp/dnd_splash.dart';
+import 'package:fluttermyapp/pages/common/permission_denied.dart';
 
 /**
  * Fluro 默认会把路径'/'当作根目录，因此必须定义根目录的 Handler。另外对于路由不存在的情况，可以设置 FluroRouter.notFoundHandler 定义错误路由处理器。
@@ -26,7 +23,7 @@ class RouterManager {
     if (router == null) {
       router = FluroRouter();
     }
-    defineRoutes();
+    defineRoutes(whiteList: [splashPath, homePath, dynamicDetailPath]);
   }
 
   /**
@@ -48,6 +45,29 @@ class RouterManager {
    *      - 带参数跳转：路由路径携带参数，和普通跳转类型，直接拼接了路径参数和 query参数，代码如下：
    *        RouterManager.router.navigateTo(context, '${RouterManager.dynamicPath}/$id?event=a&event=b')
    */
+
+  // 完整路由表
+  static final routeTable = {
+    splashPath: Handler(handlerFunc:
+        (BuildContext? context, Map<String, List<String>> parameters) {
+      return SplashPage();
+    }),
+    loginPath: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return LoginPage();
+    }),
+    dynamicDetailPath: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return DynamicDetail(params['id']![0]);
+    }),
+    homePath: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return AppHomePage();
+    })
+  };
+
+/*
+
   static var splashHandler = Handler(handlerFunc:
       (BuildContext? context, Map<String, List<String>> parameters) {
     return SplashPage();
@@ -67,16 +87,35 @@ class RouterManager {
       handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
     return AppHomePage();
   });
+*/
 
   static var notFoundHandler = Handler(
       handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
     return NotFound();
   });
 
-  static void defineRoutes() {
-    router!.define(splashPath, handler: splashHandler);
-    router!.define(homePath, handler: homeHandler);
+  // 未授权页面处理
+  static final permissionDeniedHandle = Handler(
+      handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+    return PermissionDenied();
+  });
 
+  /**
+   * 定义路由。
+   * 添加路由时，将路由路径与白名单进行对比，若不在白名单内，则使用未授权路由处理器。
+   *
+   */
+  static void defineRoutes({List<String>? whiteList}) {
+    routeTable.forEach((path, handler) {
+      if (null == whiteList || whiteList.contains(path)) {
+        router!.define(path, handler: handler);
+      } else {
+        router!.define(path,
+            handler: permissionDeniedHandle,
+            transitionType: TransitionType.material);
+      }
+    });
+/*
     // transitionType 指定转场方式；transitionDuration 动画时长，一般转场动态建议在200-300毫秒之间。
     router!.define(
       loginPath,
@@ -87,12 +126,9 @@ class RouterManager {
 
       // 逆时针围绕中心旋转
       transitionBuilder: RouterTransition.skewTransition,
-    );
+    );*/
 
-    router!.define(dynamicDetailPath,
-        handler: dynamicDetailHandler,
-        transitionType: TransitionType.inFromBottom,
-        transitionDuration: Duration(milliseconds: 1000));
+    // router!.notFoundHandler：
     router!.notFoundHandler = notFoundHandler;
   }
 }

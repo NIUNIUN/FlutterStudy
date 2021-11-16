@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermyapp/anima/router_transition.dart';
-import 'package:fluttermyapp/components/bnb_router_manager.dart';
+import 'package:fluttermyapp/routers/bnb_router_manager.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

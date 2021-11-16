@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttermyapp/bnb_app.dart';
 import 'package:fluttermyapp/bnb_dynamic_detail.dart';
 import 'package:fluttermyapp/bnb_login.dart';
-import 'package:fluttermyapp/bnb_not_found.dart';
+import 'package:fluttermyapp/pages/common/bnb_not_found.dart';
 import 'package:fluttermyapp/dnd_splash.dart';
 
 /**

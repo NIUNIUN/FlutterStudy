@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:fluttermyapp/bnb_dynamic_item.dart';
-import 'package:fluttermyapp/bnb_dynamic_mock_data.dart';
+import 'package:fluttermyapp/models/bnb_dynamic_mock_data.dart';
 
 /*   // 静态数据
 class DynamicPage extends StatelessWidget {

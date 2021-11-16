@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttermyapp/bnb_login.dart';
-import 'package:fluttermyapp/components/bnb_router_manager.dart';
-import 'package:fluttermyapp/components/bnb_router_table.dart';
+import 'package:fluttermyapp/routers/bnb_router_manager.dart';
+import 'package:fluttermyapp/routers/bnb_router_table.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key? key}) : super(key: key);

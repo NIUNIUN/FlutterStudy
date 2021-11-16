@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermyapp/anima/skew_transition.dart';
 
+/**
+ * 转场动画
+ */
 class RouterTransition {
   /**
    * 逆时针围绕中心旋转

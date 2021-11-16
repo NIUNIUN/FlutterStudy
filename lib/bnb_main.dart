@@ -1,8 +1,8 @@
 // 作为入口文件，应当做最基础的配置和全局初始化配置，不应该有业务代码。
 import 'package:flutter/material.dart';
 import 'package:fluttermyapp/bnb_app.dart';
-import 'package:fluttermyapp/components/bnb_router_manager.dart';
-import 'package:fluttermyapp/components/bnb_router_table.dart';
+import 'package:fluttermyapp/routers/bnb_router_manager.dart';
+import 'package:fluttermyapp/routers/bnb_router_table.dart';
 
 void main() {
   runApp(MyApp());

@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttermyapp/components/bnb_router_manager.dart';
-import 'package:fluttermyapp/components/bnb_router_table.dart';
+import 'package:fluttermyapp/routers/bnb_router_manager.dart';
+import 'package:fluttermyapp/routers/bnb_router_table.dart';
 
 class DynamicItem extends StatelessWidget {
   final int id;
